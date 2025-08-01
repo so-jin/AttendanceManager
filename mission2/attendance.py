@@ -88,14 +88,13 @@ class PlayerManager():
     def __init__(self, attendances):
         self.players = {}
         self.attendances = attendances
-
+        self.id_cnt = 0
     def enroll_player(self):
-        global id_cnt
         for attend in self.attendances:
             name = attend[0]
             if name not in self.players:
-                id_cnt += 1
-                self.players[name] = Player(name = name, id=id_cnt)
+                self.id_cnt += 1
+                self.players[name] = Player(name = name, id=self.id_cnt)
 
     def get_players_scores(self):
         self.calculate_players_point()
