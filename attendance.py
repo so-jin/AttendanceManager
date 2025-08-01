@@ -62,7 +62,7 @@ def input_file():
                     input2(parts[0], parts[1])
 
         for i in range(1, id_cnt + 1):
-            if dat[i][3] > 9:
+            if dat[i][2] > 9:
                 points[i] += 10
             if dat[i][5] + dat[i][6] > 9:
                 points[i] += 10
