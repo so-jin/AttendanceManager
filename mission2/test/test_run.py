@@ -109,22 +109,6 @@ def test_get_removed_player(capsys,dummy_attendance):
     assert "Removed player" in output
     assert "Ant" in output
 
-# def test_mock(self):
-#     actual = file.target_mock()
-#     expected = "mock 성공!"
-#     assert actual == expected
-
-# @mock.patch("mission2.attendance.readfile", return_value="mock 성공!")
-# def test_run(capsys):
-#     run()
-#     output = capsys.readouterr().out.rstrip()
-#     assert "NAME : Umar, POINT : 48, GRADE : SILVER" in output
-
-
-# def tes_readfile():
-#     with patch("mission.attendance.re")
-
-
 
 def test_player_manager_enroll(dummy_attendance, monkeypatch):
 
@@ -144,7 +128,6 @@ def test_get_removed_player_print(monkeypatch):
 
     manager = PlayerManager(dummy_attendance)
     manager.players["Lee"] = player
-
     printed = []
 
     def fake_print(*args):
