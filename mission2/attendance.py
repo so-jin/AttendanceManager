@@ -13,9 +13,6 @@ D5 - 리팩토링이 끝난코드에, 코드 커버리지가100% 되어야한다
 """
 import abc
 
-id_cnt = 0
-attendances = []
-
 
 class BaseClass:
     @abc.abstractmethod
@@ -88,12 +85,13 @@ class Player:
             self.grade = normal.get_name()
 
 class PlayerManager():
-    def __init__(self):
+    def __init__(self, attendances):
         self.players = {}
+        self.attendances = attendances
 
     def enroll_player(self):
         global id_cnt
-        for attend in attendances:
+        for attend in self.attendances:
             name = attend[0]
             if name not in self.players:
                 id_cnt += 1
@@ -104,7 +102,7 @@ class PlayerManager():
         self.calculate_players_bonus_point()
 
     def calculate_players_point(self):
-        for attend in attendances:
+        for attend in self.attendances:
             name = attend[0]
             day_of_week = attend[1]
             player = self.players[name]
@@ -129,20 +127,22 @@ class PlayerManager():
                 print(name)
 
 
+id_cnt = 0
 
 def run():
-    read_file()
 
-    player_manager = PlayerManager()
+    attendances = read_file("attendance_weekday_500.txt")
+    player_manager = PlayerManager(attendances)
     player_manager.enroll_player()
     player_manager.get_players_scores()
     player_manager.get_players_grade()
     player_manager.get_removed_player()
 
 
-def read_file():
+def read_file(file_path):
     try:
-        with open("attendance_weekday_500.txt", encoding='utf-8') as f:
+        attendances = []
+        with open(file_path, encoding='utf-8') as f:
             for _ in range(500):
                 line = f.readline()
                 if not line:
@@ -150,9 +150,8 @@ def read_file():
                 parts = line.strip().split()
                 if len(parts) == 2:
                     attendances.append([parts[0], parts[1]])
+        return attendances
 
     except FileNotFoundError:
         print("파일을 찾을 수 없습니다.")
 
-if __name__ == "__main__":
-    run()
